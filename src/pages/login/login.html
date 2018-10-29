@@ -1,0 +1,37 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <form #loginForm="ngForm" (ngSubmit)="loginForm.valid && login()">
+        <ion-item>
+          <ion-label color="primary" floating>Username</ion-label>
+          <ion-input name="uname" #uname="ngModel" [(ngModel)]="loginObj.uname" required></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!uname.valid && (uname.touched || loginForm.submitted)">
+            <ion-label color="danger">Please Enter a valid Username.</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label color="primary" floating>Password</ion-label>
+          <ion-input name="password" type="password" #password="ngModel" [(ngModel)]="loginObj.password" required></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!password.valid && (password.touched || loginForm.submitted)">
+            <ion-label color="danger">Please Enter a valid Password.</ion-label>
+        </ion-item>
+        <button ion-button block type="submit">Login</button>
+        <ion-item>
+          <a href="javascript:void(0)" [navPush]="signUp">New User?</a>
+        </ion-item>
+      </form>
+</ion-content>

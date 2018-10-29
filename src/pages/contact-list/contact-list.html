@@ -1,0 +1,46 @@
+<!--
+  Generated template for the ContactListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Contact List</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <h1>Welcome {{loggedInUser.username}}</h1>
+    <button ion-button round color="danger" (click)='logout()'>Logout</button>
+    <ion-list>
+        <button ion-button round block color="dark" [navPush]="contactInput">Add New Contact</button>
+        <ion-searchbar (ionInput)="filterContacts($event)" *ngIf="contacts && contacts.length"></ion-searchbar>
+          <button ion-item *ngFor="let c of contacts; let i = index;">
+            <!-- <ion-icon ios="ios-contact" md="md-contact" item-left></ion-icon> -->
+            <ion-avatar item-start>
+                <img [src]="c.avatar ? _sanitize.bypassSecurityTrustUrl(c.avatar) : _sanitize.bypassSecurityTrustUrl(defaultImg)">
+            </ion-avatar>
+            {{c.name}}
+            <p>
+              <small class="item-note">
+                {{c.address}}
+              </small>
+            </p>
+            
+            <ion-icon ios="ios-eye" md="md-eye" item-right [navPush]="details" [navParams]="c"></ion-icon>
+            <ion-icon ios="ios-create" md="md-create" item-right [navPush]="contactInput" [navParams]="c"></ion-icon>
+            <ion-icon ios="ios-trash" md="md-trash" item-right (click)="removeContact(c._id)"></ion-icon>            
+            
+          </button>
+        
+
+      </ion-list>
+      <button ion-button full round color="danger" (click)="clear()" *ngIf="contacts && contacts.length">Clear Contact List</button>
+</ion-content>
